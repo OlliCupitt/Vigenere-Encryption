@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VigenereWebApp", "VigenereWebApp\VigenereWebApp.csproj", "{8FCE1397-1144-4AC7-8D36-04243EC12EA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VigenereTest", "VigenereTest\VigenereTest.csproj", "{20E3D566-D81D-40F8-9C3B-64F7996E18C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8FCE1397-1144-4AC7-8D36-04243EC12EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FCE1397-1144-4AC7-8D36-04243EC12EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FCE1397-1144-4AC7-8D36-04243EC12EA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E3D566-D81D-40F8-9C3B-64F7996E18C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E3D566-D81D-40F8-9C3B-64F7996E18C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E3D566-D81D-40F8-9C3B-64F7996E18C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E3D566-D81D-40F8-9C3B-64F7996E18C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
