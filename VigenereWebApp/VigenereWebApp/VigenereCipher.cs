@@ -41,3 +41,34 @@ namespace VigenereWebApp
 
             return encryptedText.ToString();
         }
+        public string Decrypt(string text, string key)
+        {
+            string extendedKey = _keyGenerator.GenerateKey(text, key);
+            StringBuilder decryptedText = new StringBuilder();
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                char textChar = text[i];
+                char keyChar = extendedKey[i];
+
+
+                if (char.IsLetter(textChar))                  // Check if both characters are letters
+                {
+                    textChar = char.ToUpper(textChar);
+                    keyChar = char.ToUpper(keyChar);
+
+                    char decryptedChar = (char)((textChar - keyChar + 26) % 26 + 'A');
+                    decryptedText.Append(decryptedChar);
+                }
+                else
+                {
+                    decryptedText.Append(textChar);
+                }
+            }
+
+            return decryptedText.ToString();
+        }
+    }
+
+
+}
