@@ -1,0 +1,3 @@
+Har jobbat via Git Flow, det innebär att jag har tillverkat en ny branch för varje feature/commit som du ser i develop branchen som har sen mergats med develop. Feature branchen har sen raderats och commits har flyttats till develop. 
+För att visa detta har jag lagt till 2 commits och pushat feature branchen till github efter den första main pull request så att branchen finns kvar i network graphen, När jag har mergat till main har jag användt en Git Flow release 
+som är en branch skapad ifrån det senaste versionen av develop,, pushat Release branchen till github och sen kört pull request Main <= Release.
