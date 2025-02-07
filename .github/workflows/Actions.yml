@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/*
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:                                                    # Check out the code
+     
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+     
+      - name: Setup .NET                                        # Setup .NET environment
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0' 
+
+      
+      - name: Restore dependencies                               # Restore dependencies
+        run: dotnet restore
+
+     
+      - name: Build                                                 # Build the project
+        run: dotnet build --no-restore --configuration Release
+
+      # Run tests
+      - name: Build Test Project
+        run: dotnet build VigenereTest/VigenereTest.csproj --configuration Debug
+
+      - name: Run Tests
+        run: dotnet test VigenereTest/VigenereTest.csproj --no-build --verbosity normal
