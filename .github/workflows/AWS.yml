@@ -1,44 +1,39 @@
-name: CI/CD Pipeline
+name: Build on push to aws
 
-on:
+on: 
   push:
     branches:
       - main
-      - develop
-      - feature/*
-  pull_request:
-    branches:
-      - main
-      - develop
 
 jobs:
   build:
-    name: Build and Test
     runs-on: ubuntu-latest
 
-    steps:                                                    # Check out the code
-     
-      - name: Checkout code
+    steps: 
+      - name: checkout repo
         uses: actions/checkout@v3
 
-     
-      - name: Setup .NET                                        # Setup .NET environment
+      - name: setup dotnet
         uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: '8.0'
+
+      - name: build project
+        run: dotnet restore; dotnet publish -o site --configuration Release --runtime linux-x64
+
+      - name: check site directory contents
+        run: ls -la site
+
+      - name: create zip package
+        run: cd site; zip -r ../site.zip *
+
+      - name: Deploy to AWS EB
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
-          dotnet-version: '8.0' 
-
-      
-      - name: Restore dependencies                               # Restore dependencies
-        run: dotnet restore
-
-     
-      - name: Build                                                 # Build the project
-        run: dotnet build --no-restore --configuration Release
-
-      # Run tests
-      - name: Build Test Project
-        run: dotnet build VigenereTest/VigenereTest.csproj --configuration Debug
-
-      - name: Run Tests
-        run: dotnet test VigenereTest/VigenereTest.csproj --no-build --verbosity normal
-
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: Vigenere Web App
+          environment_name: VigenereWebApp-env-1
+          version_label: ${{ github.run_id }}
+          region: eu-north-1
+          deployment_package: site.zip
